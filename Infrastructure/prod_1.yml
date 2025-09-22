@@ -1,0 +1,86 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  - group: Terraform-SP-Auth
+  - name: terraformVersion
+    value: '1.13.2'
+  - name: environmentName
+    value: 'Prod'
+  - name: workingDir
+    value: '$(System.DefaultWorkingDirectory)/Infrastructure'
+
+stages:
+- stage: Plan
+  displayName: 'Terraform Plan'
+  jobs:
+  - job: TerraformPlan
+    displayName: 'Run Terraform Plan'
+    steps:
+    - script: |
+        curl -LO https://releases.hashicorp.com/terraform/$(terraformVersion)/terraform_$(terraformVersion)_linux_amd64.zip
+        unzip terraform_$(terraformVersion)_linux_amd64.zip
+        sudo mv terraform /usr/local/bin/
+        terraform -version
+      displayName: 'Install Terraform'
+
+    - script: |
+        echo "Environment: $(environmentName)"
+        mkdir -p $(Build.ArtifactStagingDirectory)/tfplan
+        terraform init
+        terraform plan -var-file=$(System.DefaultWorkingDirectory)/terraform.tfvars -out=$(Build.ArtifactStagingDirectory)/tfplan/tfplan
+      displayName: 'Terraform Init & Plan'
+      workingDirectory: $(workingDir)
+      env:
+        ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+        ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+        ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+        ARM_TENANT_ID: $(ARM_TENANT_ID)
+
+    - publish: $(Build.ArtifactStagingDirectory)/tfplan
+      artifact: tfplan
+
+- stage: Apply
+  displayName: 'Terraform Apply'
+  dependsOn: Plan
+  condition: succeeded('Plan')
+  jobs:
+  - job: ManualApproval
+    displayName: 'Manual Approval Before Apply'
+    pool: server
+    steps:
+    - task: ManualValidation@0
+      inputs:
+        notifyUsers: 'sudhakar.kadam@nusummit.com'
+        instructions: 'Approve to apply Terraform changes to Azure.'
+        onTimeout: 'reject'
+      timeoutInMinutes: 60
+
+  - job: TerraformApply
+    displayName: 'Run Terraform Apply'
+    dependsOn: ManualApproval
+    steps:
+    - script: |
+        curl -LO https://releases.hashicorp.com/terraform/$(terraformVersion)/terraform_$(terraformVersion)_linux_amd64.zip
+        unzip terraform_$(terraformVersion)_linux_amd64.zip
+        sudo mv terraform /usr/local/bin/
+        terraform -version
+      displayName: 'Install Terraform'
+
+    - download: current
+      artifact: tfplan
+
+    - script: |
+        echo "Environment: $(environmentName)"
+        terraform init
+        terraform apply $(Pipeline.Workspace)/tfplan/tfplan
+      displayName: 'Terraform Apply'
+      workingDirectory: $(workingDir)
+      env:
+        ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+        ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+        ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+        ARM_TENANT_ID: $(ARM_TENANT_ID)
