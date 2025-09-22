@@ -17,10 +17,18 @@ resource "azurerm_subnet" "image_subnet" {
     address_prefixes     = ["10.1.0.0/24"]
 }
 
+resource "azurerm_public_ip" "images_IP" {
+    for_each = var.image_vms
+    name = "${each.key}-ip"
+    location = azurerm_resource_group.image_rg.location
+    resource_group_name = azurerm_resource_group.image_rg.name
+    allocation_method = "Static"  
+}
+
 
 resource "azurerm_network_interface" "image_nic" {
     for_each = var.image_vms
-    name                = "$(image_vm.key)-nic"
+    name                = "${each.key}-nic"
     location            = azurerm_resource_group.image_rg.location
     resource_group_name = azurerm_resource_group.image_rg.name
 
@@ -28,6 +36,7 @@ resource "azurerm_network_interface" "image_nic" {
         name                          = "internal"
         subnet_id                     = azurerm_subnet.image_subnet.id
         private_ip_address_allocation = "Dynamic"
+        public_ip_address_id = azurerm_public_ip.images_IP[each.key].id
     }
 }
 
