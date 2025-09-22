@@ -31,7 +31,7 @@ stages:
         echo "Environment: $(environmentName)"
         mkdir -p $(Build.ArtifactStagingDirectory)/tfplan
         terraform init
-        terraform plan -var-file=$(System.DefaultWorkingDirectory)/terraform.tfvars -out=$(Build.ArtifactStagingDirectory)/tfplan/tfplan
+        terraform plan -var-file=$(System.DefaultWorkingDirectory)/Infrastructure/terraform.tfvars -out=$(Build.ArtifactStagingDirectory)/tfplan/tfplan
       displayName: 'Terraform Init & Plan'
       workingDirectory: $(workingDir)
       env:
