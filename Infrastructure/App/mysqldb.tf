@@ -19,7 +19,7 @@ resource "azurerm_mysql_flexible_server" "mysqldbskenvironmentci" {
 resource "azurerm_mysql_flexible_database" "Userdb" {
   name                = "Userdb"
   resource_group_name = var.resource_group_name
-  server_name         = azurerm_mysql_flexible_server.mysqldb.name
+  server_name         = azurerm_mysql_flexible_server.mysqldbskenvironmentci.name
   charset             = "utf8"
   collation           = "utf8_unicode_ci"
 }
