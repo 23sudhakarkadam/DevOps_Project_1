@@ -1,12 +1,12 @@
 resource "azurerm_network_interface" "maven-nic" {
   name                = "maven-nic"
   location            = var.location
-  resource_group_name = var.location
+  resource_group_name = var.resource_group_name
 
   ip_configuration {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.subnet["app_subnet"].id
-    private_ip_address_allocation = "dynamic"
+    private_ip_address_allocation = "Dynamic"
   }
 }
 
