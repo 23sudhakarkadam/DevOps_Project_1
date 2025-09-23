@@ -32,7 +32,7 @@ resource "azurerm_mysql_flexible_server" "mysqldbskenvironmentci" {
     name                   = "mysqldbskenvironmentci"
     resource_group_name    = azurerm_resource_group.mysql_rg.name
     location               = azurerm_resource_group.mysql_rg.location
-    version = "8.0"
+    version = "8.0.21"
     administrator_login    = "mysqladmin"
     administrator_password = "MyStrongP@ssword123!"
     sku_name               = "B_Standard_B2ms"
