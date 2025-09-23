@@ -20,7 +20,7 @@ resource "azurerm_lb_backend_address_pool" "appbepool" {
 }
 
 
-resource "azurerm_lb_probe" "ilbprobe" {
+resource "azurerm_lb_probe" "appilbprobe" {
     loadbalancer_id     = azurerm_lb.app_lb.id
     name                = "tcp-probe"
     protocol            = "Tcp"
@@ -36,7 +36,7 @@ resource "azurerm_lb_rule" "backend_rule" {
     backend_port                   = 8080
     frontend_ip_configuration_name = "PrivateIPAddress"
     backend_address_pool_ids = [azurerm_lb_backend_address_pool.appbepool.id]
-    probe_id = azurerm_lb_probe.ilbprobe.id
+    probe_id = azurerm_lb_probe.appilbprobe.id
 }
 
 
