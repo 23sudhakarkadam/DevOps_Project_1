@@ -27,6 +27,26 @@ resource "azurerm_lb_backend_address_pool" "webbepool" {
 }
 
 
+resource "azurerm_lb_probe" "ilbprobe" {
+  loadbalancer_id     = azurerm_lb.web_lb.id
+  name                = "http-probe"
+  protocol            = "Http"
+  port                = 80
+}
+
+resource "azurerm_lb_rule" "fronend_rule" {
+    loadbalancer_id                = azurerm_lb.web_lb.id
+    name                           = "Frontend_LBRule"
+    protocol                       = "Http"
+    frontend_port                  = 80
+    backend_port                   = 80
+    frontend_ip_configuration_name = "frontend-ip-config"
+    backend_address_pool_ids = [azurerm_lb_backend_address_pool.webbepool.id]
+    probe_id = azurerm_lb_probe.ilbprobe.id
+}
+
+
+
 resource "azurerm_linux_virtual_machine_scale_set" "web_vm" {
     name = "web-vmss"
     location = var.location
