@@ -15,7 +15,7 @@ resource "azurerm_lb" "app_lb" {
 }
 
 resource "azurerm_lb_backend_address_pool" "appbepool" {
-    loadbalancer_id = azurerm_lb.web_lb.id
+    loadbalancer_id = azurerm_lb.app_lb.id
     name = "app-bepool"
 }
 
