@@ -11,7 +11,7 @@ variables:
   - name: environmentName
     value: 'Prod'
   - name: workingDir
-    value: '$(System.DefaultWorkingDirectory)'
+    value: '$(System.DefaultWorkingDirectory)/Infrastructure/*'
 
 stages:
 - stage: Plan
