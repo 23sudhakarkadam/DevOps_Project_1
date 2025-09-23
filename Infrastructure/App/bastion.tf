@@ -17,7 +17,7 @@ resource "azurerm_bastion_host" "bastion" {
   name                = "bastion-host"
   location            = var.location
   resource_group_name = var.resource_group_name
-  dns_name            = "bastion-${azurerm_resource_group.JavaApp_rg.name}"
+#   dns_name            = "bastion-${azurerm_resource_group.JavaApp_rg.name}"
   
   ip_configuration {
     name                 = "bastion-ip-config"
