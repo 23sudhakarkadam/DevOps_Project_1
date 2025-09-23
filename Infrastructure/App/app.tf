@@ -67,7 +67,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "app_vm" {
         name = "internal"
         primary = true
         subnet_id = azurerm_subnet.subnet["app_subnet"].id
-        load_balancer_backend_address_pool_ids = [azurerm_lb_backend_address_pool.appbepool.id]
+        # load_balancer_backend_address_pool_ids = [azurerm_lb_backend_address_pool.appbepool.id]
         }
 
 }
