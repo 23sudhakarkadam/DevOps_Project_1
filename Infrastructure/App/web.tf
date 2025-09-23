@@ -37,7 +37,7 @@ resource "azurerm_lb_probe" "ilbprobe" {
 resource "azurerm_lb_rule" "fronend_rule" {
     loadbalancer_id                = azurerm_lb.web_lb.id
     name                           = "Frontend_LBRule"
-    protocol                       = "Http"
+    protocol                       = "Tcp"
     frontend_port                  = 80
     backend_port                   = 80
     frontend_ip_configuration_name = "frontend-ip-config"
