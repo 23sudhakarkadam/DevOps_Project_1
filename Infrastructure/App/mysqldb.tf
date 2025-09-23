@@ -1,3 +1,20 @@
+resource "azurerm_subnet" "mysql_subnet" {
+  name                 = "mysql-subnet"
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = var.vnet
+  address_prefixes     = ["10.0.5.0/24"]
+
+  delegation {
+    name = "mysqlfsdelegation"
+    service_delegation {
+      name = "Microsoft.DBforMySQL/flexibleServers"
+      actions = [
+        "Microsoft.Network/virtualNetworks/subnets/join/action",
+      ]
+    }
+  }
+}
+
 resource "azurerm_mysql_flexible_server" "mysqldbskenvironmentci" {
     name                   = "mysqldbskenvironmentci"
     resource_group_name    = var.resource_group_name
@@ -13,7 +30,7 @@ resource "azurerm_mysql_flexible_server" "mysqldbskenvironmentci" {
         mode = "ZoneRedundant" # or "SameZone" / "Disabled"
     }
 
-    delegated_subnet_id = azurerm_subnet.subnet["db_subnet"].id
+    delegated_subnet_id = azurerm_subnet.mysql_subnet.id
 }
 
 resource "azurerm_mysql_flexible_database" "Userdb" {
