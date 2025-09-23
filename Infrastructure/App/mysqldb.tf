@@ -1,5 +1,5 @@
-resource "azurerm_mysql_flexible_server" "mysqldb" {
-    name                   = "mysqldb"
+resource "azurerm_mysql_flexible_server" "mysqldbskenvironmentci" {
+    name                   = "mysqldbskenvironmentci"
     resource_group_name    = var.resource_group_name
     location               = var.location
     administrator_login    = "mysqladmin"
