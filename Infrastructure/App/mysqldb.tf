@@ -40,7 +40,7 @@ resource "azurerm_mysql_flexible_server" "mysqldbskenvironmentci" {
         
     backup_retention_days = 7
     geo_redundant_backup_enabled = false
-    public_network_access = Enabled
+    public_network_access = "Enabled"
    
 }
 
