@@ -4,12 +4,12 @@
   <servers>
     <server>
       <username>sudhakar.kadam@nusummit.com</username>
-      <password>Skd23@123</password>
+      <password>cmVmdGtuOjAxOjE3OTAxNjI2MDk6UHpWSXdFMnFwYzZMek85OXBLVDN1ZWNzWEtm</password>
       <id>central</id>
     </server>
     <server>
       <username>sudhakar.kadam@nusummit.com</username>
-      <password>Sdk23@123</password>
+      <password>cmVmdGtuOjAxOjE3OTAxNjI2MDk6UHpWSXdFMnFwYzZMek85OXBLVDN1ZWNzWEtm</password>
       <id>snapshots</id>
     </server>
   </servers>
@@ -44,7 +44,7 @@
           <snapshots />
           <id>snapshots</id>
           <name>libs-snapshot</name>
-          <urlhttps://skenvironment.jfrog.io/artifactory/skenv-libs-snapshot</url>
+          <url>https://skenvironment.jfrog.io/artifactory/skenv-libs-snapshot</url>
         </pluginRepository>
       </pluginRepositories>
       <id>artifactory</id>
