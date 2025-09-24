@@ -1,8 +1,8 @@
-# resource "azurerm_resource_group" "mysql_rg" {
-#     name = "mysql-rg"
-#     location = "South India"
+resource "azurerm_resource_group" "mysql_rg" {
+    name = "mysql-rg"
+    location = "South India"
   
-# }
+}
 
 # resource "azurerm_virtual_network" "mysql_vnet" {
 #     name                = "mysql-vnet"
