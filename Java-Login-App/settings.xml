@@ -3,13 +3,13 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <servers>
     <server>
-      <username>prdevop26@gmail.com</username>
-      <password>Admin123!</password>
+      <username>sudhakar.kadam@nusummit.com</username>
+      <password>Skd23@123</password>
       <id>central</id>
     </server>
     <server>
-      <username>prdevop26@gmail.com</username>
-      <password>Admin123!</password>
+      <username>sudhakar.kadam@nusummit.com</username>
+      <password>Sdk23@123</password>
       <id>snapshots</id>
     </server>
   </servers>
@@ -22,13 +22,13 @@
           </snapshots>
           <id>central</id>
           <name>libs-release</name>
-          <url>https://edshopdpt8.jfrog.io/artifactory/libs-release</url>
+          <url>https://skenvironment.jfrog.io/artifactory/skenv-libs-release</url>
         </repository>
         <repository>
           <snapshots />
           <id>snapshots</id>
           <name>libs-snapshot</name>
-          <url>https://edshopdpt8.jfrog.io/artifactory/libs-snapshot</url>
+          <url>https://skenvironment.jfrog.io/artifactory/skenv-libs-snapshot</url>
         </repository>
       </repositories>
       <pluginRepositories>
@@ -38,13 +38,13 @@
           </snapshots>
           <id>central</id>
           <name>libs-release</name>
-          <url>https://edshopdpt8.jfrog.io/artifactory/libs-release</url>
+          <url>https://skenvironment.jfrog.io/artifactory/skenv-libs-release</url>
         </pluginRepository>
         <pluginRepository>
           <snapshots />
           <id>snapshots</id>
           <name>libs-snapshot</name>
-          <url>https://edshopdpt8.jfrog.io/artifactory/libs-snapshot</url>
+          <urlhttps://skenvironment.jfrog.io/artifactory/skenv-libs-snapshot</url>
         </pluginRepository>
       </pluginRepositories>
       <id>artifactory</id>
