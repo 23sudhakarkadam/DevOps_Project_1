@@ -5,7 +5,7 @@ resource "azurerm_public_ip" "web_ip" {
     allocation_method   = "Static"
     sku                 = "Standard"
 
-    depends_on = [ azurerm_resource_group.JavaApp_rg ]
+    depends_on = [ azurerm_resource_group.rg-env ]
 }
 
 resource "azurerm_lb" "web_lb" {
