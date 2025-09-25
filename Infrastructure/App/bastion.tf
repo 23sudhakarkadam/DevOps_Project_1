@@ -11,6 +11,8 @@ resource "azurerm_public_ip" "bastion_pip" {
   resource_group_name = var.resource_group_name
   allocation_method   = "Static"
   sku                 = "Standard"
+
+  depends_on = [ azurerm_resource_group.rg-env ]
 }
 
 resource "azurerm_bastion_host" "bastion" {
