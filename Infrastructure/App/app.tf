@@ -1,4 +1,3 @@
-
 resource "azurerm_lb" "app_lb" {
     name                = "app-lb"
     location            = var.location

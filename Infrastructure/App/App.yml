@@ -54,7 +54,7 @@ stages:
     steps:
     - task: ManualValidation@0
       inputs:
-        notifyUsers: 'sudhakar.kadam@nusummit.com'
+        notifyUsers: '<EMail ID for approval>'
         instructions: 'Approve to apply Terraform changes to Azure.'
         onTimeout: 'reject'
       timeoutInMinutes: 60

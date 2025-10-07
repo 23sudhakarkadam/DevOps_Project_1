@@ -74,6 +74,3 @@ resource "azurerm_subnet_network_security_group_association" "nsg_ass" {
     network_security_group_id = azurerm_network_security_group.image_nsg.id
   
 }
-
-
-
